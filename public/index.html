@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pong Rush 🏓</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background: cyan;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 20px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏓 Pong Rush</h1>
+  <p>Find an opponent and start your match!</p>
+  <button id="findBtn">Find Opponent</button>
+  <p id="status"></p>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const btn = document.getElementById("findBtn");
+    const status = document.getElementById("status");
+
+    btn.addEventListener("click", () => {
+      btn.disabled = true;
+      status.innerText = "Finding opponent...";
+      socket.emit("findMatch");
+    });
+
+    socket.on("matchFound", ({ roomId }) => {
+      status.innerText = "Opponent found! Starting game...";
+      setTimeout(() => {
+        window.location.href = `/game.html?room=${roomId}`;
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

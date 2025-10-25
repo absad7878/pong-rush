@@ -1,0 +1,7 @@
+html,body{height:100%;margin:0;font-family:Inter,Arial;background:#071427;color:#e6eef6}
+#panel{position:fixed;left:12px;top:12px;z-index:20}
+h1{margin:0 0 8px 0;font-size:18px}
+input{padding:8px;border-radius:6px;border:1px solid #234}
+button{padding:8px 10px;margin:6px;border-radius:8px;border:none;background:#2b6;cursor:pointer}
+#status,#matchInfo,#scoreBoard,#nameInfo{margin-top:6px}
+canvas{display:block;margin:0 auto;border-radius:8px;max-width:100%;height:auto;background:linear-gradient(180deg,#071427,#021018);box-shadow:0 6px 20px rgba(0,0,0,0.6)}

@@ -1,4 +1,7 @@
-const socket = io("https://pong-rush-backend.onrender.com");
+const socket = io("https://pong-rush-backend.onrender.com", {
+  transports: ["websocket"],
+  withCredentials: true
+});
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get("room");
 

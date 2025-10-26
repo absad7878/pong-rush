@@ -36,9 +36,9 @@
   <button id="findBtn">Find Opponent</button>
   <p id="status"></p>
 
-<script src="https://pong-rush-backend.onrender.com/socket.io/socket.io.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io("https://pong-rush-backend.onrender.com");
+    const socket = io();
     const btn = document.getElementById("findBtn");
     const status = document.getElementById("status");
 

@@ -24,6 +24,10 @@
       border-radius: 8px;
       cursor: pointer;
     }
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
     #status {
       margin-top: 20px;
       color: #aaa;
@@ -42,13 +46,30 @@
     const btn = document.getElementById("findBtn");
     const status = document.getElementById("status");
 
+    socket.on("connect", () => {
+      console.log("Connected to server:", socket.id);
+    });
+    socket.on("connect_error", (err) => {
+      console.error("Connection error:", err.message);
+      status.innerText = "Failed to connect to server. Try again.";
+      btn.disabled = false;
+    });
+
     btn.addEventListener("click", () => {
+      console.log("Find Opponent clicked");
       btn.disabled = true;
       status.innerText = "Finding opponent...";
       socket.emit("findMatch");
+      setTimeout(() => {
+        if (status.innerText === "Finding opponent...") {
+          status.innerText = "No opponent found. Try again.";
+          btn.disabled = false;
+        }
+      }, 30000);
     });
 
     socket.on("matchFound", ({ roomId }) => {
+      console.log("Match found, roomId:", roomId);
       status.innerText = "Opponent found! Starting game...";
       setTimeout(() => {
         window.location.href = `/game.html?room=${roomId}`;
